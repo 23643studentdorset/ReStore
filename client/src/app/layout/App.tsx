@@ -1,12 +1,15 @@
 import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { useState } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import AboutPage from "../../features/about/AboutPage";
 import Catalog from "../../features/catalog/Catalog";
 import ProductDetails from "../../features/catalog/ProductDetails";
 import ContactPage from "../../features/contact/Contactpage";
 import HomePage from "../../features/home/Home";
 import Header from "./Header";
+import 'react-toastify/dist/ReactToastify.css';
+import NotFound from "../errors/NotFound";
 
 function App() {
   const[darkMode, setDarkMode] = useState(false)
@@ -26,14 +29,18 @@ function handleThemeChange(){
 
   return (
     <ThemeProvider theme={theme}>
+      <ToastContainer position = 'bottom-right' hideProgressBar />
       <CssBaseline />
       <Header darkMode={darkMode} handleThemeChange={handleThemeChange}  />
       <Container>
-        <Route exact path='/' component={HomePage}/>
-        <Route exact path='/catalog' component={Catalog}/>
-        <Route exact path='/catalog/:id' component={ProductDetails}/>
-        <Route exact path='/about' component={AboutPage}/>
-        <Route exact path='/contact' component={ContactPage}/>
+        <Switch>
+          <Route exact path='/' component={HomePage}/>
+          <Route exact path='/catalog' component={Catalog}/>
+          <Route exact path='/catalog/:id' component={ProductDetails}/>
+          <Route exact path='/about' component={AboutPage}/>
+          <Route exact path='/contact' component={ContactPage}/>
+          <Route component={NotFound}/>
+        </Switch>
       </Container>
     </ThemeProvider>
   );
