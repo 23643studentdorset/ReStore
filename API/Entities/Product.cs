@@ -8,17 +8,17 @@ namespace API.Entities
     public class Product
     {
         public int id { get; set; }
-        public String name { get; set; }
+        public string name { get; set; }
 
-        public String description { get; set; }
+        public string description { get; set; }
 
         public long price { get; set; }
 
-        public String pictureUrl { get; set; }
+        public string pictureUrl { get; set; }
 
-        public String type { get; set; }
+        public string type { get; set; }
 
-        public String brand { get; set; }
+        public string brand { get; set; }
 
         public int quantityInStock { get; set; }
     }
