@@ -11,7 +11,6 @@ import Header from "./Header";
 import 'react-toastify/dist/ReactToastify.css';
 import NotFound from "../errors/NotFound";
 import BasketPage from "../../features/basket/basketPage";
-import { useStoreContext } from "../context/StoreContext";
 import { getCookie } from "../util/util";
 import agent from "../api/agent";
 import LoadingComponent from "./LoadingComponent";
@@ -33,7 +32,7 @@ function App() {
     } else {
       setLoading(false);
     }
-  }, [setBasket])
+  }, [dispatch])
   
   const[darkMode, setDarkMode] = useState(false)
   const palleteType = darkMode ? 'dark' : 'light'
