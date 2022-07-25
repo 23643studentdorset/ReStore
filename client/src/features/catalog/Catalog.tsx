@@ -14,7 +14,7 @@ export default function Catalog (){
   useEffect(() =>{
     agent.Catalog.list()
     if(!productsLoaded) dispatch(fetchProductsAsync());
-  }, [productsLoaded])
+  }, [productsLoaded, dispatch])
 
   if(status.includes('pending')) return <LoadingComponent message='Loading products...'/>
     return(
