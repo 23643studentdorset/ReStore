@@ -27,7 +27,7 @@ namespace API.Controllers
         public async Task<ActionResult<BasketDto>> GetBasket()
         {
             Basket basket = await RetrieveBasket();
-            if (basket == null) return NotFound();
+            if (basket == null) return BadRequest(new ProblemDetails{Title = "Product Not Found"});
 
             return MapBasketToDto(basket);
         }
