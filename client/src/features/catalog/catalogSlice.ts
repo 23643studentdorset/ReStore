@@ -2,8 +2,9 @@ import { Construction } from "@mui/icons-material";
 import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import agent from "../../app/api/agent";
 import { Product } from "../../app/models/product";
+import { RootState } from "../../app/store/configureStore";
 
-const productAdapter = createEntityAdapter<Product>();
+const productsAdapter = createEntityAdapter<Product>();
 
 export const fetchProductsAsync = createAsyncThunk<Product[]>(
     'catalog/fetchProductsAsync',
@@ -18,7 +19,7 @@ export const fetchProductsAsync = createAsyncThunk<Product[]>(
 
 export const catalogSlice = createSlice({
     name: 'catalog',
-    initialState: productAdapter.getInitialState ({
+    initialState: productsAdapter.getInitialState ({
         productsLoaded: false,
         status: 'idle',
     }),
@@ -28,12 +29,14 @@ export const catalogSlice = createSlice({
             state.status = 'pendingFetchProducts';
         });
         builder.addCase(fetchProductsAsync.fulfilled, (state, action) => {
-            productAdapter.setAll(state, action.payload);
+            productsAdapter.setAll(state, action.payload);
             state.status = 'idle';
             state.productsLoaded = true;
-        })
+        });
         builder.addCase(fetchProductsAsync.rejected, (state) => {
             state.status = 'idle';
-        })
+        });
     })
 })
+
+export const productSelectors = productsAdapter.getSelectors((state:RootState) => state.catalog);
