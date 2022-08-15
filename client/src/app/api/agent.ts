@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
+import { fetchFilters } from "../../features/catalog/catalogSlice";
 
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
@@ -49,7 +50,8 @@ const request = {
 
 const Catalog = {
     list: () => request.get('products'),
-    details: (id: number) => request.get(`products/${id}`)
+    details: (id: number) => request.get(`products/${id}`),
+    fetchFilters: () => request.get('products/filters')
 }
 
 const TestErrors ={
